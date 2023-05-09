@@ -10,4 +10,5 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
     List<Contact> findByNomOrderByNomAsc(String nom);
     Contact findByTelephone1OrTelephone2(String telephone1, String telephone2);
 
+
 }

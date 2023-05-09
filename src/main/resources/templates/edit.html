@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout/head :: headFragment"></head>
+  <body>
+    <div class="dashboard-main-wrapper">
+      <div th:replace="layout/navbar :: navbarFragment"></div>
+
+      <div th:replace="layout/sidebar :: sidebarFragment"></div>
+      <div class="dashboard-wrapper">
+        <div class="container-fluid dashboard-content">
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="section-block" id="basicform">
+                <h3 class="section-title">Edit contact</h3>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <form action="#" th:action="@{/contacts/edit/{id}(id=${contact.id})}" th:method="post">
+                    <div class="form-group">
+                      <label for="nom" class="col-form-label">Last Name:</label>
+                      <input
+                        id="nom"
+                        name="nom"
+                        type="text"
+                        class="form-control"
+                        th:value="${contact.nom}"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="prenom" class="col-form-label"
+                        >First Name:</label
+                      >
+                      <input
+                        id="prenom"
+                        name="prenom"
+                        type="text"
+                        class="form-control"
+                        th:value="${contact.prenom}"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="emailPersonnel">Personal Email address</label>
+                      <input
+                        id="emailPersonnel"
+                        type="email"
+                        name="emailPersonnel"
+                        placeholder="name@example.com"
+                        class="form-control"
+                        th:value="${contact.emailPersonnel}"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="emailProfessionnel">Work Email address</label>
+                      <input
+                        id="emailProfessionnel"
+                        type="email"
+                        name="emailProfessionnel"
+                        placeholder="name@example.com"
+                        class="form-control"
+                        th:value="${contact.emailProfessionnel}"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="telephone1">Personal Phone:</label>
+                      <input
+                        type="text"
+                        id="telephone1"
+                        name="telephone1"
+                        class="form-control"
+                        th:value="${contact.telephone1}"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="telephone2">Work Phone:</label>
+                      <input
+                        type="text"
+                        id="telephone2"
+                        name="telephone2"
+                        class="form-control"
+                        th:value="${contact.telephone2}"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="adresse">Address:</label>
+                      <input
+                        type="text"
+                        id="adresse"
+                        name="adresse"
+                        class="form-control"
+                        th:value="${contact.adresse}"
+                      />
+                    </div>
+                    <div class="form-group">
+                    <label for="genre">Gender:</label>
+                    <select id="genre" name="genre" class="form-select">
+                      <option value="male">Male</option>
+                      <option value="female">Female</option></select
+                    >
+                </div>
+
+                    <button class="btn btn-primary" type="submit">Edit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

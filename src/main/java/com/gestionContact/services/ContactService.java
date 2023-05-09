@@ -5,6 +5,8 @@ import com.gestionContact.repositories.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ContactService {
     @Autowired
@@ -65,5 +67,19 @@ public class ContactService {
         return contactRepository.findByTelephone1OrTelephone2(telephone1, telephone2);
     }
 
+    public void updateContact(Contact contact){
+        Contact con = findById(contact.getId());
+        if(con != null){
+            con.setGenre(contact.getGenre());
+            con.setAdresse(contact.getAdresse());
+            con.setNom(contact.getNom());
+            con.setPrenom(contact.getPrenom());
+            con.setEmailPersonnel(contact.getEmailPersonnel());
+            con.setEmailProfessionnel(contact.getEmailProfessionnel());
+            con.setTelephone1(contact.getTelephone1());
+            con.setTelephone2(contact.getTelephone2());
+            contactRepository.save(con);
+        }
+    }
 
 }

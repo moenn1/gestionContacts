@@ -17,40 +17,49 @@ public class ContactController {
 
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "redirect:/contacts";
     }
 
     @GetMapping("/contacts")
     public String viewContact(Model model) {
         model.addAttribute("contacts", contactService.findAll());
-        return "contact-list";
+        return "overview";
     }
 
-    @PostMapping("/contacts")
+    @GetMapping("/add")
+    public String addContactForm(Model model) {
+        return "addform";
+    }
+
+    @PostMapping("/add")
     public String createContact(@ModelAttribute Contact contact, Model model) {
         contactService.save(contact);
         model.addAttribute("contacts", contactService.findAll());
-        return "contact-list";
+        return "overview";
+    }
+
+    @GetMapping("/contacts/edit/{id}")
+    public String updateContactPage(@PathVariable("id") Long id, Model model){
+        Contact con = contactService.findById(id);
+        model.addAttribute("contact", con);
+        return "edit";
     }
 
     @PostMapping("/contacts/edit/{id}")
     public String updateContact(@PathVariable("id") Long id, @ModelAttribute Contact contact) {
-        Contact con = contactService.findById(id);
-        con.setGenre(contact.getGenre());
-        con.setAdresse(contact.getAdresse());
-        con.setNom(contact.getNom());
-        con.setPrenom(contact.getPrenom());
-        con.setEmailPersonnel(contact.getEmailPersonnel());
-        con.setEmailProfessionnel(contact.getEmailProfessionnel());
-        con.setTelephone1(contact.getTelephone1());
-        con.setTelephone2(contact.getTelephone2());
-        contactService.save(con);
-        return "contact-list";
+        contactService.updateContact(contact);
+        return "redirect:/contacts";
     }
 
     @PostMapping("/contacts/delete/{id}")
     public String deleteContact(@PathVariable("id") Long id) {
         contactService.deleteById(id);
-        return "contact-list";
+        return "redirect:/contacts";
+    }
+
+
+    @GetMapping("/search")
+    public String searchPage(){
+        return "search";
     }
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+<div class="dashboard-header" th:fragment="navbarFragment">
+    <nav class="navbar navbar-expand-lg bg-white fixed-top">
+        <a class="navbar-brand" href="/">Contact Management</a>
+        
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto navbar-right-top">
+                <li class="nav-item">
+                    <div id="custom-search" class="top-search-bar">
+                        <input class="form-control" oninput="liveSearch()" 
+                        id="searchbox" type="text" placeholder="Search..">
+                    </div>
+                </li>
+        
+            </ul>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
