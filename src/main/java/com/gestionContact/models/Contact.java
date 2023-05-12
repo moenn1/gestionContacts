@@ -2,6 +2,7 @@ package com.gestionContact.models;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Component
@@ -18,6 +19,31 @@ public class Contact {
     private String emailPersonnel;
     private String emailProfessionnel;
     private String genre;
+
+    @ManyToMany
+    @JoinTable(
+            name = "contact_group",
+            joinColumns = @JoinColumn(name = "contact_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<Group> groups = new HashSet<>();
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
+
+    public void addGroup(Group group) {
+        this.groups.add(group);
+        group.getContacts().add(this);
+    }
+
+    public void removeGroup(Group group) {
+        this.groups.remove(group);
+        group.getContacts().remove(this);
+    }
 
     public Contact(){
     }

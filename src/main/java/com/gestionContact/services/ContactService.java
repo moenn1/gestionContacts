@@ -1,11 +1,14 @@
 package com.gestionContact.services;
 
 import com.gestionContact.models.Contact;
+import com.gestionContact.models.Group;
 import com.gestionContact.repositories.ContactRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.apache.commons.text.similarity.LevenshteinDistance;
+import java.util.*;
 
-import java.util.Optional;
 
 @Service
 public class ContactService {
@@ -17,6 +20,7 @@ public class ContactService {
     }
 
     public void save(Contact con){
+
         contactRepository.save(con);
     }
 
@@ -80,6 +84,21 @@ public class ContactService {
             con.setTelephone2(contact.getTelephone2());
             contactRepository.save(con);
         }
+    }
+
+    public List<Contact> findByNameApproximation(String name) {
+        List<Contact> allContacts = contactRepository.findAll();
+        LevenshteinDistance ld = new LevenshteinDistance();
+        List<Contact> similarContacts = new ArrayList<>();
+
+        for (Contact contact : allContacts) {
+            int distance = ld.apply(contact.getNom(), name);
+            if (distance <= 3) {  // adjust this value as needed
+                similarContacts.add(contact);
+            }
+        }
+
+        return similarContacts;
     }
 
 }

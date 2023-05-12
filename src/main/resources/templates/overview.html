@@ -25,6 +25,7 @@
                         <th>Personal Email</th>
                         <th>Work Email</th>
                         <th>Gender</th>
+                        <th>Group(s)</th>
                         <th>Actions</th>
                       </tr>
                       </thead>
@@ -38,6 +39,10 @@
                           <td th:text="${contact.emailPersonnel}"></td>
                           <td th:text="${contact.emailProfessionnel}"></td>
                           <td th:text="${contact.genre}"></td>
+                          <th:block th:each="group : ${contact.groups}">
+                            <td th:text="${group.name}"></td>
+                          </th:block>
+
                           <td>
                             <form action="#" th:action="@{/contacts/edit/{id}(id=${contact.id})}" th:method="get">
                               <input type="submit" value="Edit" class="btn btn-success">

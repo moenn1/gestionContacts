@@ -55,6 +55,13 @@
 			<artifactId>thymeleaf-spring5</artifactId>
 			<version>3.0.11.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+			<version>1.9</version> <!-- Use the latest version -->
+		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -1,8 +1,9 @@
 package com.gestionContact.controllers;
 
 import com.gestionContact.models.Contact;
+import com.gestionContact.models.Group;
 import com.gestionContact.services.ContactService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.gestionContact.services.GroupService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.*;
 public class ContactController {
     private final ContactService contactService;
 
-    public ContactController(ContactService contactService) {
+    private final GroupService groupService;
+
+    public ContactController(ContactService contactService, GroupService groupService) {
         this.contactService = contactService;
+        this.groupService = groupService;
     }
 
     @GetMapping("/")
@@ -28,11 +32,16 @@ public class ContactController {
 
     @GetMapping("/add")
     public String addContactForm(Model model) {
+        model.addAttribute("groups", groupService.findAll());
         return "addform";
     }
 
     @PostMapping("/add")
-    public String createContact(@ModelAttribute Contact contact, Model model) {
+    public String createContact(@ModelAttribute("contact") Contact contact, @RequestParam("group") Long groupId, Model model) {
+        Group group = groupService.findById(groupId);
+        if (group != null) {
+            contact.addGroup(group);
+        }
         contactService.save(contact);
         model.addAttribute("contacts", contactService.findAll());
         return "overview";
@@ -55,6 +64,11 @@ public class ContactController {
     public String deleteContact(@PathVariable("id") Long id) {
         contactService.deleteById(id);
         return "redirect:/contacts";
+    }
+
+    @GetMapping("/groups")
+    public String groupsPage(){
+        return "groups";
     }
 
 
