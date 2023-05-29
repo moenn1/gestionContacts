@@ -9,21 +9,29 @@
     <div class="dashboard-wrapper">
       <div class="container-fluid  dashboard-content">
     <div class="row">
-
-        <div class="card">
-            <h5 class="card-header">Select Example</h5>
+        <div class="card" style="width: 100%;">
+            <h5 class="card-header">Advanced Search</h5>
             <div class="card-body">
-                <form>
+                <form action="" th:action="@{/search}" th:method="post">
                     <div class="form-group">
-                        <label for="input-select">Example Select</label>
-                        <select class="form-control" id="input-select">
-                            <option>Choose Example</option>
+                        <label for="input-select">Search by:</label>
+                        <select class="form-control" id="input-select" name="param">
+                            <option value="nom">Name</option>
+                            <option value="prenom">First Name</option>
+                            <option value="telephone1">Personal Phone</option>
+                            <option value="telephone2">Work Phone</option>
+                            <option value="adresse">Address</option>
+                            <option value="email_personnel">Personal Email</option>
+                            <option value="email_professionnel">Work Email</option>
+                            <option value="gender">Gender</option>
+                            <option value="group">Group(s)</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="input-select">Example Select</label>
-                        <input type="text" class="form-control" id="input-select" placeholder="Example placeholder">
+                        <label for="input-select">Keyword</label>
+                        <input type="text" class="form-control" id="input-select" placeholder="Search" name="val">
                     </div>
+                    <input type="submit" value="Search" class="btn">
                 </form>
             </div>
         </div>
@@ -36,15 +44,16 @@
                   <table class="table" id="contactsTable">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>First Name</th>
-                        <th>Personal Phone</th>
-                        <th>Work Phone</th>
-                        <th>Address</th>
-                        <th>Personal Email</th>
-                        <th>Work Email</th>
-                        <th>Gender</th>
-                        <th>Actions</th>
+                          <th>Name</th>
+                          <th>First Name</th>
+                          <th>Personal Phone</th>
+                          <th>Work Phone</th>
+                          <th>Address</th>
+                          <th>Personal Email</th>
+                          <th>Work Email</th>
+                          <th>Gender</th>
+                          <th>Group(s)</th>
+                          <th>Actions</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -57,6 +66,9 @@
                           <td th:text="${contact.emailPersonnel}"></td>
                           <td th:text="${contact.emailProfessionnel}"></td>
                           <td th:text="${contact.genre}"></td>
+                            <th:block th:each="group : ${contact.groups}">
+                                <td th:text="${group.name}"></td>
+                            </th:block>
                           <td>
                             <form action="#" th:action="@{/contacts/edit/{id}(id=${contact.id})}" th:method="get">
                               <input type="submit" value="Edit" class="btn btn-success">

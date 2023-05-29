@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head :: headFragment"></head>
+<body>
+<div class="dashboard-main-wrapper">
+  <div th:replace="layout/navbar :: navbarFragment"></div>
+
+  <div th:replace="layout/sidebar :: sidebarFragment"></div>
+  <div class="dashboard-wrapper">
+    <div class="container-fluid  dashboard-content">
+      <div class="row">
+
+        <div >
+          <div class="card">
+            <h5 class="card-header">Groups Overview</h5>
+            <div class="card-body">
+              <table class="table" id="contactsTable">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>First Name</th>
+                  <th>Personal Phone</th>
+                  <th>Work Phone</th>
+                  <th>Address</th>
+                  <th>Personal Email</th>
+                  <th>Work Email</th>
+                  <th>Gender</th>
+                  <th>Group(s)</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr >
+
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+</body>
+
+<script>
+  function liveSearch() {
+    // Get the search box input
+    let input = document.getElementById('searchbox');
+    let filter = input.value.toUpperCase();
+
+    // Get the contacts table
+    let table = document.getElementById('contactsTable');
+    let tr = table.getElementsByTagName('tr');
+
+    // Loop through all rows, and hide those that don't match the search query
+    for (let i = 0; i < tr.length; i++) {
+      let td = tr[i].getElementsByTagName('td');
+      let found = false;
+      for(let j = 0; j < td.length; j++) {
+        if (td[j]) {
+          let txtValue = td[j].textContent || td[j].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            found = true;
+            break;
+          }
+        }
+      }
+      tr[i].style.display = found ? "" : "none";
+    }
+  }
+</script>
+
+
+
+</html>

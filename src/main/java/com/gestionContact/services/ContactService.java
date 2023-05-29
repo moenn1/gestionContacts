@@ -1,7 +1,6 @@
 package com.gestionContact.services;
 
 import com.gestionContact.models.Contact;
-import com.gestionContact.models.Group;
 import com.gestionContact.repositories.ContactRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,10 @@ public class ContactService {
 
     public ContactService(ContactRepository contactRepository){
         this.contactRepository = contactRepository;
+    }
+
+    public List<Contact> findByPrenomOrderByNomAsc(String prenom){
+        return contactRepository.findByPrenomOrderByNomAsc(prenom);
     }
 
     public void save(Contact con){
@@ -67,9 +70,11 @@ public class ContactService {
     }
 
 
-    public Contact findByTelephone1or2(String telephone1, String telephone2){
-        return contactRepository.findByTelephone1OrTelephone2(telephone1, telephone2);
+    public Contact findByTelephone1(String telephone1){
+        return contactRepository.findByTelephone1(telephone1);
     }
+
+
 
     public void updateContact(Contact contact){
         Contact con = findById(contact.getId());
@@ -93,12 +98,38 @@ public class ContactService {
 
         for (Contact contact : allContacts) {
             int distance = ld.apply(contact.getNom(), name);
-            if (distance <= 3) {  // adjust this value as needed
+            if (distance <= 3) {  //We can adjust this value (margin of error)
                 similarContacts.add(contact);
             }
         }
 
         return similarContacts;
     }
+
+    public Contact findByTelephone2(String telephone2){
+        return contactRepository.findByTelephone2(telephone2);
+    }
+
+    public Contact findByEmailProfessionnel(String emailProfessionnel){
+        return contactRepository.findByEmailProfessionnel(emailProfessionnel);
+    }
+
+    public Contact findByEmailPersonnel(String emailPersonnel) {
+        return contactRepository.findByEmailPersonnel(emailPersonnel);
+    }
+
+    public Contact findByAdresse(String adresse){
+        return contactRepository.findByAdresse(adresse);
+    }
+
+    public List<Contact> findByGenre(String genre){
+        return contactRepository.findByGenre(genre);
+    }
+
+   /* public List<Contact> findByGroup(String group){
+        return contactRepository.findByGroup(group);
+    }
+
+*/
 
 }

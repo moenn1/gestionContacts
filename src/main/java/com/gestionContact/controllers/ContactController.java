@@ -4,14 +4,17 @@ import com.gestionContact.models.Contact;
 import com.gestionContact.models.Group;
 import com.gestionContact.services.ContactService;
 import com.gestionContact.services.GroupService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ContactController {
+    @Autowired
     private final ContactService contactService;
 
+    @Autowired
     private final GroupService groupService;
 
     public ContactController(ContactService contactService, GroupService groupService) {
@@ -66,14 +69,36 @@ public class ContactController {
         return "redirect:/contacts";
     }
 
-    @GetMapping("/groups")
-    public String groupsPage(){
-        return "groups";
+    @GetMapping("/search")
+    public String searchPage(Model model){
+        model.addAttribute("contacts", contactService.findAll());
+        return "search";
     }
 
+    @PostMapping("/search")
+    public String searchByVal(Model model, @RequestParam("param") String param, @RequestParam("val") String value) {
+        if (param.equals("nom")) {
+            model.addAttribute("contacts", contactService.findByNameApproximation(value));
+        } else if (param.equals("telephone1")) {
+            model.addAttribute("contacts", contactService.findByTelephone1(value));
+        } else if (param.equals("telephone2")){
+            model.addAttribute("contacts", contactService.findByTelephone2(value));
+        } else if (param.equals("adresse")) {
+            model.addAttribute("contacts", contactService.findByAdresse(value));
+        } else if (param.equals("email_personnel")) {
+            model.addAttribute("contacts", contactService.findByEmailPersonnel(value));
+        } else if (param.equals("email_professionnel")) {
+            model.addAttribute("contacts", contactService.findByEmailProfessionnel(value));
+        } else if (param.equals("gender")) {
+            model.addAttribute("contacts", contactService.findByGenre(value));
+         /* } else if (param.equals("group")) {
+            model.addAttribute("contacts", contactService.findByGroup(value));*/
+        } else if (param.equals("prenom")) {
+            model.addAttribute("contacts", contactService.findByPrenomOrderByNomAsc(value));
+        } else {
+            model.addAttribute("contacts", contactService.findAll());
+        }
 
-    @GetMapping("/search")
-    public String searchPage(){
         return "search";
     }
 }
