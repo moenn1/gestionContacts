@@ -9,41 +9,57 @@
   <div class="dashboard-wrapper">
     <div class="container-fluid  dashboard-content">
       <div class="row">
-            <h5 class="card-header">Groups Overview</h5>
+
+        <div >
+          <div class="card">
+            <h5 class="card-header">Contact Overview</h5>
+            <div class="card-body">
               <table class="table" id="contactsTable">
                 <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Count</th>
+                  <th>First Name</th>
+                  <th>Personal Phone</th>
+                  <th>Work Phone</th>
+                  <th>Address</th>
+                  <th>Personal Email</th>
+                  <th>Work Email</th>
+                  <th>Gender</th>
+                  <th>Group(s)</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="group : ${groups}">
-                  <td th:text="${group.getKey()}"></td>
-                  <td th:text="${group.getValue()}"></td>
+                <tr th:each="contact : ${contacts}">
+                  <td th:text="${contact.nom}"></td>
+                  <td th:text="${contact.prenom}"></td>
+                  <td th:text="${contact.telephone1}"></td>
+                  <td th:text="${contact.telephone2}"></td>
+                  <td th:text="${contact.adresse}"></td>
+                  <td th:text="${contact.emailPersonnel}"></td>
+                  <td th:text="${contact.emailProfessionnel}"></td>
+                  <td th:text="${contact.genre}"></td>
+                  <th:block th:each="group : ${contact.groups}">
+                    <td th:text="${group.name}"></td>
+                  </th:block>
 
                   <td>
-                    <form action="#" th:action="@{/groups/contacts/{name}(name=${group.getKey()})}" th:method="get" class="d-inline-block">
-                      <input type="submit" value="View contacts" class="btn btn-success">
-                    </form>
-                    <form action="#" th:action="@{/groups/edit/{name}(name=${group.getKey()})}" th:method="get" class="d-inline-block">
+                    <form action="#" th:action="@{/contacts/edit/{id}(id=${contact.id})}" th:method="get">
                       <input type="submit" value="Edit" class="btn btn-success">
                     </form>
-                    <form action="#" th:action="@{/groups/delete/{name}(name=${group.getKey()})}" th:method="post" class="d-inline-block">
+                    <form action="#" th:action="@{/contacts/delete/{id}(id=${contact.id})}" th:method="post">
                       <input type="submit" value="Delete" class="btn btn-danger">
                     </form>
                   </td>
-
-
-
                 </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+      </div>
     </div>
+  </div>
 
 
 </div>

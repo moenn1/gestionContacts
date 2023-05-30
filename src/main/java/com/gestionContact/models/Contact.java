@@ -5,7 +5,6 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Component
 public class Contact {
 
     @Id

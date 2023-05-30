@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head :: headFragment"></head>
+<body>
+<div class="dashboard-main-wrapper">
+  <div th:replace="layout/navbar :: navbarFragment"></div>
+
+  <div th:replace="layout/sidebar :: sidebarFragment"></div>
+  <div class="dashboard-wrapper">
+    <div class="container-fluid dashboard-content">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="section-block" id="basicform">
+            <h3 class="section-title">Add group</h3>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <form action="/groups/add" method="post">
+                <div class="form-group">
+                  <label for="name" class="col-form-label">Group name:</label>
+                  <input
+                          id="name"
+                          name="name"
+                          type="text"
+                          class="form-control"
+                  />
+                </div>
+
+
+                <button class="btn btn-primary" type="submit">Add</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

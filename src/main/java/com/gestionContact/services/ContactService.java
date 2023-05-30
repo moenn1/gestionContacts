@@ -126,10 +126,10 @@ public class ContactService {
         return contactRepository.findByGenre(genre);
     }
 
-   /* public List<Contact> findByGroup(String group){
+    /*
+    public List<Contact> findByGroup(String group){
         return contactRepository.findByGroup(group);
     }
-
-*/
+    */
 
 }

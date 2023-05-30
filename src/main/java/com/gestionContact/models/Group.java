@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Component
 @Table(name = "group_table")
 public class Group {
     @Id

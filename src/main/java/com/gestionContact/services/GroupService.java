@@ -5,6 +5,8 @@ import com.gestionContact.models.Group;
 import com.gestionContact.repositories.GroupRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+
 @Service
 public class GroupService {
     @Autowired
@@ -57,4 +59,16 @@ public class GroupService {
     }
 
 
+    public HashMap<String, Integer> countAllGroups() {
+        HashMap<String, Integer> groups = new HashMap<>();
+        for (Group group : groupRepository.findAll()) {
+            groups.put(group.getName(), groupRepository.countByName(group.getName()));
+            System.out.println(group.getName() + " " + groupRepository.countByName(group.getName()));
+        }
+        return groups;
+    }
+
+    public Group findByName(String name) {
+        return groupRepository.findByName(name);
+    }
 }

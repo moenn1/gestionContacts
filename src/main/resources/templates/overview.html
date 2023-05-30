@@ -44,10 +44,10 @@
                           </th:block>
 
                           <td>
-                            <form action="#" th:action="@{/contacts/edit/{id}(id=${contact.id})}" th:method="get">
+                            <form action="#" th:action="@{/contacts/edit/{id}(id=${contact.id})}" th:method="get" class="d-inline-block">
                               <input type="submit" value="Edit" class="btn btn-success">
                             </form>
-                            <form action="#" th:action="@{/contacts/delete/{id}(id=${contact.id})}" th:method="post">
+                            <form action="#" th:action="@{/contacts/delete/{id}(id=${contact.id})}" th:method="post" class="d-inline-block">
                               <input type="submit" value="Delete" class="btn btn-danger">
                             </form>
                           </td>
