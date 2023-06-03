@@ -38,17 +38,17 @@ public class GenerateData {
                 Group group = new Group();
                 group.setId(1L);
                 group.setName("Family");
-                contact.getGroups().add(group);
+                //contact.getGroups().add(group);
             } else if (randomGroup == 2) {
                 Group group = new Group();
                 group.setId(2L);
                 group.setName("Friends");
-                contact.getGroups().add(group);
+                //contact.getGroups().add(group);
             } else if (randomGroup == 3) {
                 Group group = new Group();
                 group.setId(3L);
                 group.setName("Work");
-                contact.getGroups().add(group);
+               // contact.getGroups().add(group);
             }
             contactRepository.save(contact);
         }

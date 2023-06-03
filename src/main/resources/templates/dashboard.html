@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head :: headFragment"></head>
+<body>
+<div class="dashboard-main-wrapper">
+  <div th:replace="layout/navbar :: navbarFragment"></div>
+
+  <div th:replace="layout/sidebar :: sidebarFragment"></div>
+
+  <div class="dashboard-wrapper">
+    <div class="dashboard-influence">
+      <div class="container-fluid dashboard-content">
+
+
+        <div class="row">
+          <!-- ============================================================== -->
+          <!-- four widgets   -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- total views   -->
+          <!-- ============================================================== -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-inline-block">
+                  <h5 class="text-muted">Total contacts</h5>
+                  <h2 class="mb-0" th:text="${totalContacts}"></h2>
+                </div>
+                <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
+                  <i class="fa fa-eye fa-fw fa-sm text-info"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end total views   -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- total followers   -->
+          <!-- ============================================================== -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-inline-block">
+                  <h5 class="text-muted">Total groups</h5>
+                  <h2 class="mb-0" th:text="${totalGroups}"></h2>
+                </div>
+                <div class="float-right icon-circle-medium  icon-box-lg  bg-primary-light mt-1">
+                  <i class="fa fa-calendar fa-fw fa-sm text-primary"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end total followers   -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- partnerships   -->
+          <!-- ============================================================== -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-inline-block">
+
+                  <h5 class="text-muted">Female</h5>
+                  <h2 class="mb-0" th:text="${totalFemale}"></h2>
+                </div>
+                <div class="float-right icon-circle-medium  icon-box-lg  bg-secondary-light mt-1">
+                  <i class="fa fa-user fa-fw fa-sm text-secondary"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-inline-block">
+                  <h5 class="text-muted">Male</h5>
+                  <h2 class="mb-0" th:text="${totalMale}"></h2>
+                </div>
+                <div class="float-right icon-circle-medium  icon-box-lg  bg-brand-light mt-1">
+                  <i class="fa fa-user fa-fw fa-sm text-brand"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <!-- ============================================================== -->
+          <!-- followers by gender   -->
+          <!-- ============================================================== -->
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card">
+              <h5 class="card-header">Followers by Gender</h5>
+              <div class="card-footer p-0 bg-white d-flex">
+                <div class="card-footer-item card-footer-item-bordered w-50">
+                  <h2 class="mb-0" th:text="${#numbers.formatDecimal(percentageFemale,1,1) + '%'}"></h2>
+                  <p>Female </p>
+
+                </div>
+                <div class="card-footer-item card-footer-item-bordered">
+                  <h2 class="mb-0" th:text="${#numbers.formatDecimal(percentageMale,1,1)} + '%'"></h2>
+                  <p>Male </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end followers by gender  -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- followers by age   -->
+          <!-- ============================================================== -->
+          <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card">
+              <h5 class="card-header">Followers by Age (unf)</h5>
+              <div class="card-body">
+                <div class="mb-3">
+                  <div class="d-inline-block">
+                    <h4 class="mb-0">15 - 20</h4>
+                  </div>
+                  <div class="progress mt-2 float-right progress-md">
+                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 45%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-inline-block">
+                    <h4 class="mb-0">20 - 25</h4>
+                  </div>
+                  <div class="progress mt-2 float-right progress-md">
+                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 55%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-inline-block">
+                    <h4 class="mb-0">25 - 35</h4>
+                  </div>
+                  <div class="progress mt-2 float-right progress-md">
+                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-inline-block">
+                    <h4 class="mb-0">35 - 50</h4>
+                  </div>
+                  <div class="progress mt-2 float-right progress-md">
+                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 21%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class="d-inline-block">
+                    <h4 class="mb-0">50 - 70</h4>
+                  </div>
+                  <div class="progress mt-2 float-right progress-md">
+                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 25%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end followers by age   -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- followers by locations   -->
+          <!-- ============================================================== -->
+          <div class="col-xl-5 col-lg-12 col-md-6 col-sm-12 col-12">
+            <div class="card">
+              <h5 class="card-header">Top Followers by Locations (unf)</h5>
+              <div class="card-body">
+                <canvas id="chartjs_bar_horizontal"></canvas>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end followers by locations  -->
+          <!-- ============================================================== -->
+        </div>
+        <div class="row">
+          <!-- ============================================================== -->
+          <!-- campaign activities   -->
+          <!-- ============================================================== -->
+          <div class="col-lg-12">
+            <div class="section-block">
+              <h3 class="section-title">Notes (unf)</h3>
+            </div>
+            <div class="card">
+              <div class="campaign-table table-responsive">
+                <table class="table">
+                  <thead>
+                  <tr class="border-0">
+                    <th class="border-0">Note</th>
+                    <th class="border-0">Note</th>
+                    <th class="border-0">Note</th>
+                    <th class="border-0">Note</th>
+                    <th class="border-0">Status</th>
+                    <th class="border-0">Start Date</th>
+                    <th class="border-0">Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <div class="m-r-10"><img src="assets/images/dribbble.png" alt="user" width="35"></div>
+                    </td>
+                    <td>Note</td>
+                    <td>
+                      <div class="avatar-group">
+                        <span><a href="#"><i class="fab fa-fw fa-facebook-square facebook-color"></i></a></span>
+                        <span><a href="#"><i class="fab fa-fw fa-twitter-square twitter-color"></i></a></span>
+                        <span><a href="#"><i class="fab fa-fw fa-instagram instagram-color"></i></a></span>
+                        <span><a href="#"><i class="fab fa-fw fa-pinterest-square pinterest-color"></i></a></span>
+                      </div>
+                    </td>
+                    <td>1,00,000 / 1,50,000</td>
+                    <td>70%</td>
+                    <td>7 Aug,2018</td>
+                    <td>
+                      <div class="dropdown float-right">
+                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="true">
+                          <i class="mdi mdi-dots-vertical"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="m-r-10"><img src="assets/images/github.png" alt="user" width="35"></div>
+                    </td>
+                    <td>Note</td>
+                    <td>
+                      <div class="avatar-group">
+                        <span><a href="#"><i class="fab fa-fw fa-facebook-square facebook-color "></i></a></span>
+                        <span><a href="#"><i class="fab fa-fw fa-twitter-square twitter-color "></i></a></span>
+                      </div>
+                    </td>
+                    <td>2,50,000 / 3,50,000</td>
+                    <td>70%</td>
+                    <td>10 Aug,2018</td>
+                    <td>
+                      <div class="dropdown float-right">
+                        <a href="#" class="dropdown-toggle  card-drop" data-toggle="dropdown" aria-expanded="true">
+                          <i class="mdi mdi-dots-vertical"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="m-r-10"><img src="assets/images/dropbox.png" alt="user" width="35"></div>
+                    </td>
+                    <td>Note</td>
+                    <td>
+                      <div class="avatar-group">
+                        <span><a href="#"><i class="fab fa-fw fa-facebook-square facebook-color "></i></a></span>
+                        <span><a href="#"><i class="fab fa-fw fa-pinterest-square pinterest-color "></i></a></span>
+                      </div>
+                    </td>
+                    <td>3,50,000 / 4,50,000</td>
+                    <td>70%</td>
+                    <td>22 Aug,2018</td>
+                    <td>
+                      <div class="dropdown float-right">
+                        <a href="#" class="dropdown-toggle  card-drop" data-toggle="dropdown" aria-expanded="true">
+                          <i class="mdi mdi-dots-vertical"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="m-r-10"><img src="assets/images/bitbucket.png" alt="user" width="30"></div>
+                    </td>
+                    <td>2018 Top Product </td>
+                    <td>
+                      <div class="avatar-group">
+                        <span><a href="#"><i class="fab fa-fw fa-pinterest-square pinterest-color"></i></a></span>
+                      </div>
+                    </td>
+                    <td>4,50,000 / 5,50,000</td>
+                    <td>70%</td>
+                    <td>25 Aug,2018</td>
+                    <td>
+                      <div class="dropdown float-right">
+                        <a href="#" class="dropdown-toggle  card-drop" data-toggle="dropdown" aria-expanded="true">
+                          <i class="mdi mdi-dots-vertical"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Note</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Note</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="m-r-10"><img src="assets/images/mail_chimp.png" alt="user" width="30"></div>
+                    </td>
+                    <td>Top Dashboard Sale 2018</td>
+                    <td>
+                      <div class="avatar-group">
+                        <span><a href="#"><i class="fab fa-fw fa-facebook-square facebook-color"></i></a></span>
+                        <span><a href="#"><i class="fab fa-fw fa-pinterest-square pinterest-color"></i></a></span>
+                      </div>
+                    </td>
+                    <td>5,50,000 / 6,50,000</td>
+                    <td>70%</td>
+                    <td>27 Aug,2018</td>
+                    <td>
+                      <div class="dropdown float-right">
+                        <a href="#" class="dropdown-toggle  card-drop" data-toggle="dropdown" aria-expanded="true">
+                          <i class="mdi mdi-dots-vertical"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                          <!-- item-->
+                          <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- end campaign activities   -->
+          <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- recommended campaigns   -->
+        <!-- ============================================================== -->
+        <div class="row">
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card campaign-card text-center">
+              <div class="card-body">
+                <div class="campaign-img"><img src="assets/images/dribbble.png" alt="user" class="user-avatar-xl"></div>
+                <div class="campaign-info">
+                  <h3 class="mb-1">Note</h3>
+                  <p class="mb-3">Vestibulum porttitor laoreet faucibus.</p>
+                  <p class="mb-1">Min, Views:<span class="text-dark font-medium ml-2">2,50,000</span></p>
+                  <p>Payout: <span class="text-dark font-medium ml-2">$22</span></p>
+                  <a href="#"><i class="fab fa-twitter-square fa-sm twitter-color"></i> </a><a href="#"><i class="fab fa-snapchat-square fa-sm snapchat-color"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card campaign-card text-center">
+              <div class="card-body">
+                <div class="campaign-img"><img src="assets/images/github.png" alt="user" class=" user-avatar-xl"></div>
+                <div class="campaign-info">
+                  <h3 class="mb-1">Note</h3>
+                  <p class="mb-3">Lorem ipsum dolor sit ament</p>
+                  <p class="mb-1">Min, Views:<span class="text-dark font-medium ml-2">1,00,000</span></p>
+                  <p>Payout: <span class="text-dark font-medium ml-2">$28</span></p>
+                  <a href="#"><i class="fab fa-instagram fa-sm instagram-color"></i> </a><a href="#"><i class="fab fa-facebook-square fa-sm facebook-color"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card campaign-card text-center">
+              <div class="card-body">
+                <div class="campaign-img"><img src="assets/images/slack.png" alt="user" class="user-avatar-xl"></div>
+                <div class="campaign-info">
+                  <h3 class="mb-1">Note</h3>
+                  <p class="mb-3">Maecenas mattis tempor libero pretium.</p>
+                  <p class="mb-1">Min, Views:<span class="text-dark font-medium ml-2">3,80,000</span></p>
+                  <p>Payout: <span class="text-dark font-medium ml-2">$36</span></p>
+                  <a href="#"><i class="fab fa-facebook-square fa-sm facebook-color"></i> </a><a href="#"><i class="fab fa-snapchat-square fa-sm snapchat-color"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card campaign-card text-center">
+              <div class="card-body">
+                <div class="campaign-img"><img src="assets/images/mail_chimp.png" alt="user" class="user-avatar-xl"></div>
+                <div class="campaign-info">
+                  <h3 class="mb-1">Note</h3>
+                  <p class="mb-3">Proin vitae lacinia leo</p>
+                  <p class="mb-1">Min, Views:<span class="text-dark font-medium ml-2">4,50,000</span></p>
+                  <p>Payout: <span class="text-dark font-medium ml-2">$57</span></p>
+                  <a href="#"><i class="fab fa-twitter-square fa-sm twitter-color"></i> </a><a href="#"><i class="fab fa-snapchat-square fa-sm snapchat-color"></i></a>
+                  <a href="#"><i class="fab fa-facebook-square fa-sm facebook-color"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end recommended campaigns   -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- end content  -->
+        <!-- ============================================================== -->
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+
+    <div th:replace="layout/footer :: footerFragment"></div>
+
+    <!-- ============================================================== -->
+    <!-- end footer -->
+    <!-- ============================================================== -->
+  </div>
+
+</div>
+</body>
+
+<script>
+  function liveSearch() {
+    // Get the search box input
+    let input = document.getElementById('searchbox');
+    let filter = input.value.toUpperCase();
+
+    // Get the contacts table
+    let table = document.getElementById('contactsTable');
+    let tr = table.getElementsByTagName('tr');
+
+    // Loop through all rows, and hide those that don't match the search query
+    for (let i = 0; i < tr.length; i++) {
+      let td = tr[i].getElementsByTagName('td');
+      let found = false;
+      for(let j = 0; j < td.length; j++) {
+        if (td[j]) {
+          let txtValue = td[j].textContent || td[j].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            found = true;
+            break;
+          }
+        }
+      }
+      tr[i].style.display = found ? "" : "none";
+    }
+  }
+</script>
+
+
+
+</html>

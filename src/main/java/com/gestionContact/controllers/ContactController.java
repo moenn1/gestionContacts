@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @Controller
 public class ContactController {
     @Autowired
@@ -22,9 +24,14 @@ public class ContactController {
         this.groupService = groupService;
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "redirect:/contacts";
+    @GetMapping("/contacts/{id}")
+    public String viewContact(@PathVariable("id") Long id, Model model) {
+        Contact contact = contactService.findById(id);
+        ArrayList<Group> groups = new ArrayList<>();
+        groups = (ArrayList<Group>) contact.getGroupsList();
+        model.addAttribute("contact", contact);
+        model.addAttribute("groups", groups);
+        return "contactdetails";
     }
 
     @GetMapping("/contacts")
@@ -45,7 +52,7 @@ public class ContactController {
         if (group != null) {
             contact.addGroup(group);
         }
-        contactService.save(contact);
+        contactService.updateContact(contact, group);
         model.addAttribute("contacts", contactService.findAll());
         return "overview";
     }
@@ -54,12 +61,13 @@ public class ContactController {
     public String updateContactPage(@PathVariable("id") Long id, Model model){
         Contact con = contactService.findById(id);
         model.addAttribute("contact", con);
+        model.addAttribute("groups", groupService.findAll());
         return "edit";
     }
 
     @PostMapping("/contacts/edit/{id}")
-    public String updateContact(@PathVariable("id") Long id, @ModelAttribute Contact contact) {
-        contactService.updateContact(contact);
+    public String updateContact(@PathVariable("id") Long id, @ModelAttribute Contact contact, @RequestParam("group") Long groupId) {
+        contactService.updateContact(contact, groupService.findById(groupId));
         return "redirect:/contacts";
     }
 
@@ -101,4 +109,7 @@ public class ContactController {
 
         return "search";
     }
+
+
+
 }

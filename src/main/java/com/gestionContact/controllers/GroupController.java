@@ -1,6 +1,7 @@
 package com.gestionContact.controllers;
 
 
+import com.gestionContact.models.Contact;
 import com.gestionContact.models.Group;
 import com.gestionContact.services.ContactService;
 import com.gestionContact.services.GroupService;
@@ -54,16 +55,22 @@ public class GroupController {
         return "groups";
     }
 
-    //Done
+    //Delete group
     @PostMapping("/groups/delete/{name}")
     public String deleteGroup(Model model, @PathVariable("name") String name){
+        //Find all contacts in the group
+        Group group = groupService.findByName(name);
+        for (Contact contact: group.getContacts()){
+            contact.removeGroup(group);
+            contactService.save(contact);
+        }
         groupService.delete(groupService.findByName(name));
         model.addAttribute("groups", groupService.countAllGroups());
         return "groups";
     }
 
 
-    //Done
+    //Afficher les contacts par group
     @GetMapping("/groups/contacts/{name}")
     public String viewGroupContacts(Model model, @PathVariable("name") String name){
         model.addAttribute("contacts", groupService.findByName(name).getContacts());
@@ -71,5 +78,14 @@ public class GroupController {
         return "groupcontacts";
     }
 
+    @GetMapping("/addtogroup/{name}/{id}")
+    public String addContactToGroup(Model model, @PathVariable String name, @PathVariable Long id){
+        Contact contact = contactService.findById(id);
+        Group group = groupService.findByName(name);
+        contact.addGroup(group);
+        contactService.save(contact);
+        model.addAttribute("contacts", contactService.findAll());
+        return "overview";
+    }
 
 }

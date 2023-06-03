@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head :: headFragment"></head>
+<body>
+<div class="dashboard-main-wrapper">
+  <div th:replace="layout/navbar :: navbarFragment"></div>
+
+  <div th:replace="layout/sidebar :: sidebarFragment"></div>
+
+  <div class="dashboard-wrapper">
+    <div class="dashboard-influence">
+      <div class="container-fluid dashboard-content">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card influencer-profile-data">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
+                    <div class="text-center">
+                      <img th:src="@{/assets/images/avatar-1.jpg}" alt="User Avatar" class="rounded-circle user-avatar-xxl" src="">
+                    </div>
+                  </div>
+                  <div class="col-xl-10 col-lg-8 col-md-8 col-sm-8 col-12">
+                    <div class="user-avatar-info">
+                      <div class="m-b-20">
+                        <div class="user-avatar-name">
+                          <h2 class="mb-1" th:text="${contact.getFullName()}"></h2>
+                        </div>
+                        <div class="rating-star  d-inline-block" th:each="group : ${groups}">
+                          <p class="d-inline-block text-dark" th:text="${group.getName()}"></p>
+                        </div>
+                      </div>
+                 <div class="float-right"><a href="#" class="user-avatar-email text-secondary" th:text="${contact.getEmailPersonnel()}"></a></div>
+                      <br>
+                      <div class="float-right"><a href="#" class="user-avatar-email text-secondary" th:text="${contact.getEmailProfessionnel()}"></a></div>
+                      <div class="user-avatar-address">
+                        <p class="border-bottom pb-3">
+                          <span class="d-xl-inline-block d-block mb-2"><i class="fa fa-map-marker-alt mr-2 text-primary " th:text="${contact.getAdresse()}"></i></span>
+                          <span class=" mb-2 d-xl-inline-block d-block ml-xl-4" th:text="${contact.getGenre()}"></span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="border-top user-social-box">
+                <div class="user-social-media d-xl-inline-block"><span class="mr-2 twitter-color"> <i class="fab fa-twitter-square"></i></span><span>13,291</span></div>
+                <div class="user-social-media d-xl-inline-block"><span class="mr-2  pinterest-color"> <i class="fab fa-pinterest-square"></i></span><span>84,019</span></div>
+                <div class="user-social-media d-xl-inline-block"><span class="mr-2 instagram-color"> <i class="fab fa-instagram"></i></span><span>12,300</span></div>
+                <div class="user-social-media d-xl-inline-block"><span class="mr-2  facebook-color"> <i class="fab fa-facebook-square "></i></span><span>92,920</span></div>
+                <div class="user-social-media d-xl-inline-block"><span class="mr-2 youtube-color"> <i class="fab fa-youtube"></i></span><span>1291</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+      </div>
+
+    <div th:replace="layout/footer :: footerFragment"></div>
+
+  </div>
+
+</div>
+
+</body>
+
+<script>
+  function liveSearch() {
+    // Get the search box input
+    let input = document.getElementById('searchbox');
+    let filter = input.value.toUpperCase();
+
+    // Get the contacts table
+    let table = document.getElementById('contactsTable');
+    let tr = table.getElementsByTagName('tr');
+
+    // Loop through all rows, and hide those that don't match the search query
+    for (let i = 0; i < tr.length; i++) {
+      let td = tr[i].getElementsByTagName('td');
+      let found = false;
+      for(let j = 0; j < td.length; j++) {
+        if (td[j]) {
+          let txtValue = td[j].textContent || td[j].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            found = true;
+            break;
+          }
+        }
+      }
+      tr[i].style.display = found ? "" : "none";
+    }
+  }
+</script>
+
+
+
+</html>

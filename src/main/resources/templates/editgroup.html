@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head :: headFragment"></head>
 <body>
+<div class="dashboard-main-wrapper">
+    <div th:replace="layout/navbar :: navbarFragment"></div>
 
+    <div th:replace="layout/sidebar :: sidebarFragment"></div>
+    <div class="dashboard-wrapper">
+        <div class="container-fluid dashboard-content">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="section-block" id="basicform">
+                        <h3 class="section-title">Edit group</h3>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="" th:action="@{/group/edit/{name}(name=${group.name})}" method="post">
+                                <div class="form-group">
+                                    <label for="name" class="col-form-label">Group name:</label>
+                                    <input
+                                            id="name"
+                                            name="name"
+                                            type="text"
+                                            class="form-control"
+                                            th:value="${group.name}"
+                                    />
+                                </div>
+
+
+                                <button class="btn btn-primary" type="submit">Edit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="layout/footer :: footerFragment"></div>
+    </div>
+</div>
 </body>
 </html>

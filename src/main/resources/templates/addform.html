@@ -95,10 +95,10 @@
                     >
                 </div>
                     <div class="form-group">
-                      <label for="group">Address:</label>
+                      <label for="group">Group:</label>
                       <select class="form-select" aria-label="Default select example" name="group" id="group">
                         <th:block th:each="group : ${groups}">
-                          <option th:value="${group.id}" th:text="${group.name}"></option>
+                          <option th:value="${group.id}" th:text="${group.name}" th:name="group"></option>
                         </th:block>
                       </select>
                     </div>
@@ -110,7 +110,10 @@
             </div>
           </div>
         </div>
+        <div th:replace="layout/footer :: footerFragment"></div>
+
       </div>
     </div>
+
   </body>
 </html>

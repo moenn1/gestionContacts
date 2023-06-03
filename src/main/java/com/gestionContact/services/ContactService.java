@@ -1,6 +1,7 @@
 package com.gestionContact.services;
 
 import com.gestionContact.models.Contact;
+import com.gestionContact.models.Group;
 import com.gestionContact.repositories.ContactRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,7 @@ public class ContactService {
 
 
 
-    public void updateContact(Contact contact){
+    public void updateContact(Contact contact, Group group){
         Contact con = findById(contact.getId());
         if(con != null){
             con.setGenre(contact.getGenre());
@@ -87,6 +88,10 @@ public class ContactService {
             con.setEmailProfessionnel(contact.getEmailProfessionnel());
             con.setTelephone1(contact.getTelephone1());
             con.setTelephone2(contact.getTelephone2());
+            con.setGroups(null);
+            if(group != null){
+                con.setGroup(group);
+            }
             contactRepository.save(con);
         }
     }
@@ -131,5 +136,11 @@ public class ContactService {
         return contactRepository.findByGroup(group);
     }
     */
+
+
+    public int countByGenre(String genre){
+        return contactRepository.countByGenre(genre);
+    }
+
 
 }

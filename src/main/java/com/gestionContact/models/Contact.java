@@ -2,6 +2,7 @@ package com.gestionContact.models;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 @Entity
@@ -28,6 +29,10 @@ public class Contact {
 
     public Set<Group> getGroups() {
         return groups;
+    }
+
+    public List<Group> getGroupsList() {
+        return new ArrayList<>(groups);
     }
 
     public void setGroups(Set<Group> groups) {
@@ -59,8 +64,17 @@ public class Contact {
         this.genre = genre;
     }
 
+    public void setGroup(Group group) {
+        this.groups = new HashSet<>();
+        this.groups.add(group);
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public String getFullName() {
+        return this.nom + " " + this.prenom;
     }
 
     public void setId(Long id) {
