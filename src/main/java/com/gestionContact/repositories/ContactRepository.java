@@ -23,10 +23,11 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
     Contact findByAdresse(String adresse);
 
     List<Contact> findByGenre(String genre);
-    //List<Contact> findByGroup(String group);
+
 
     int countByNom(String nom);
 
     int countByGenre(String genre);
+
 
 }

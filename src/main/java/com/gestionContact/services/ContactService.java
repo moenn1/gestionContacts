@@ -7,6 +7,8 @@ import com.gestionContact.repositories.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.text.similarity.LevenshteinDistance;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.*;
 
 
@@ -26,6 +28,17 @@ public class ContactService {
     public void save(Contact con){
 
         contactRepository.save(con);
+    }
+
+    public void save(Contact con, Long groupId){
+        Group group = null;
+        if(groupId != null){
+            group = new Group();
+            group.setId(groupId);
+        }
+        con.setGroup(group);
+        contactRepository.save(con);
+
     }
 
     public void delete(Contact con){
@@ -103,7 +116,7 @@ public class ContactService {
 
         for (Contact contact : allContacts) {
             int distance = ld.apply(contact.getNom(), name);
-            if (distance <= 3) {  //We can adjust this value (margin of error)
+            if (distance <= 3) {  //We can adjust this value (number of substitutions)
                 similarContacts.add(contact);
             }
         }
@@ -141,6 +154,7 @@ public class ContactService {
     public int countByGenre(String genre){
         return contactRepository.countByGenre(genre);
     }
+
 
 
 }

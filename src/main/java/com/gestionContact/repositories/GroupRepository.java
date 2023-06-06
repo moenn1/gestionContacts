@@ -17,4 +17,6 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
     public int countByName(@Param("name") String name);
 
     public Group findByName(String name);
+
+
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 @Controller
 public class ContactController {
@@ -18,6 +18,22 @@ public class ContactController {
 
     @Autowired
     private final GroupService groupService;
+
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("totalContacts", contactService.count());
+        model.addAttribute("totalGroups", groupService.count());
+        int totalMale = contactService.countByGenre("male");
+        int totalFemale = contactService.countByGenre("female");
+        model.addAttribute("totalMale", totalMale);
+        model.addAttribute("totalFemale", totalFemale);
+        double percentageFemale = (double) totalFemale / (totalMale + totalFemale) * 100;
+        double percentageMale = (double) totalMale / (totalMale + totalFemale) * 100;
+        model.addAttribute("percentageFemale", percentageFemale);
+        model.addAttribute("percentageMale", percentageMale);
+        return "dashboard";
+    }
+
 
     public ContactController(ContactService contactService, GroupService groupService) {
         this.contactService = contactService;
@@ -52,8 +68,9 @@ public class ContactController {
         if (group != null) {
             contact.addGroup(group);
         }
-        contactService.updateContact(contact, group);
+        contactService.save(contact, groupId);
         model.addAttribute("contacts", contactService.findAll());
+        model.addAttribute("groups", groupService.findAll());
         return "overview";
     }
 
@@ -66,8 +83,9 @@ public class ContactController {
     }
 
     @PostMapping("/contacts/edit/{id}")
-    public String updateContact(@PathVariable("id") Long id, @ModelAttribute Contact contact, @RequestParam("group") Long groupId) {
-        contactService.updateContact(contact, groupService.findById(groupId));
+    public String updateContact(@PathVariable("id") Long id, @ModelAttribute Contact contact, @RequestParam("groupId") Long groupId) {
+        contactService.save(contact, groupId);
+
         return "redirect:/contacts";
     }
 
@@ -99,8 +117,6 @@ public class ContactController {
             model.addAttribute("contacts", contactService.findByEmailProfessionnel(value));
         } else if (param.equals("gender")) {
             model.addAttribute("contacts", contactService.findByGenre(value));
-         /* } else if (param.equals("group")) {
-            model.addAttribute("contacts", contactService.findByGroup(value));*/
         } else if (param.equals("prenom")) {
             model.addAttribute("contacts", contactService.findByPrenomOrderByNomAsc(value));
         } else {
@@ -110,6 +126,31 @@ public class ContactController {
         return "search";
     }
 
+
+    @PostMapping("/contacts/removeFromGroup/{id}")
+    public String removeFromGroup(@PathVariable("id") Long id, @RequestParam("groupId") Long groupId) {
+        Contact contact = contactService.findById(id);
+        Group group = groupService.findById(groupId);
+        if (!contact.getGroupsList().contains(group)) {
+            return "redirect:/contacts/" + id;
+        }
+        contact.removeGroup(group);
+        contactService.save(contact);
+        return "redirect:/contacts/" + id;
+    }
+
+    @PostMapping("/contacts/addToGroup/{id}")
+    public String addToGroup(@PathVariable("id") Long id, @RequestParam("groupId") Long groupId) {
+        //if not already in group
+        Contact contact = contactService.findById(id);
+        Group group = groupService.findById(groupId);
+        if (contact.getGroupsList().contains(group)) {
+            return "redirect:/contacts/" + id;
+        }
+        contact.addGroup(group);
+        contactService.save(contact);
+        return "redirect:/contacts/" + id;
+    }
 
 
 }

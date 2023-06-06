@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.gestionContact.models.Group;
 import com.gestionContact.repositories.GroupRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 
